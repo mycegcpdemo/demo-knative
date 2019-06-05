@@ -1,0 +1,25 @@
+apiVersion: build.knative.dev/v1alpha1
+kind: Build
+metadata:
+  name: knative-app
+spec:
+  source:
+    serviceAccountName: knative-build
+    custom:
+        image: gcr.io/cloud-builders/gcloud:latest
+        args: ["source", "repos", "clone", ]
+  steps:
+  - name: gcloud-clone-repo
+    image: gcr.io/cloud-builders/gcloud
+    args: ['source', 'repos', 'clone', 'demo-gke', '--project=gke-advance', '.']
+  - name: git-switch-branch
+    image: gcr.io/cloud-builders/git
+    args: ['checkout','-b','knative']
+  - name: build-and-push
+    image: "gcr.io/kaniko-project/executor:v0.6.0"
+    args:
+    - "--dockerfile=flask-example/Dockerfile"
+    # MY_GCP_PROJECT: Replace with the GCP Project's ID.
+    - "--destination=gcr.io/gke-advance/frontend-knative"
+
+    #gcloud source repos clone demo-gke --project=gke-advance

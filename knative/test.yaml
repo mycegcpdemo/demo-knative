@@ -1,0 +1,17 @@
+apiVersion: build.knative.dev/v1alpha1
+kind: Build
+metadata:
+  name: demo-4
+spec:
+  serviceAccountName: git-sa
+  source:
+    git:
+      url: "git@github.com:mycegcpdemo/knative.git"
+      revision: "v1"
+    subPath: "flask-example/"
+  steps:
+  - name: build-and-push
+    image: "gcr.io/kaniko-project/executor:v0.6.0"
+    args:
+    - "--dockerfile=/workspace/Dockerfile"
+    - "--destination=gcr.io/knative-demo-1/demo-app:latest"

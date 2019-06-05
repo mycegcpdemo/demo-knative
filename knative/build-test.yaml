@@ -1,0 +1,16 @@
+apiVersion: build.knative.dev/v1alpha1
+kind: Build
+metadata:
+  name: knative-app-2
+spec:
+  serviceAccountName: git-sa
+  source:
+    git:
+      url: git@github.com:mycegcpdemo/knative.git
+      revision: master
+  steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'gcr.io/knative-demo-1/demo-app:$COMMIT_SHA', '/workspace/Dockerfile' ]
+    image: 'gcr.io/knative-demo-1/demo-app:$COMMIT_SHA'
+
+
