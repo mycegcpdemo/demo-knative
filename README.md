@@ -45,6 +45,9 @@
 
 16. https://github.com/knative/build/blob/master/test/git-ssh/2-build.yaml
 
+17. "Cloud Platform" API needs to be enabled inorder to access GCR without authenticating
+
+
 
 
 
