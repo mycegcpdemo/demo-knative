@@ -1,13 +1,12 @@
 apiVersion: build.knative.dev/v1alpha1
 kind: Build
 metadata:
-  name: demo-4
+  name: demo
 spec:
-  serviceAccountName: git-sa
   source:
     git:
-      url: "git@github.com:mycegcpdemo/knative.git"
-      revision: "v1"
+      url: "https://github.com/mycegcpdemo/demo-knative.git"
+      revision: "master"
     subPath: "flask-example/"
   steps:
   - name: build-and-push
