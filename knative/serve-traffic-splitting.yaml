@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: demo-app
+  namespace: default
+spec:
+  release:
+    # Ordered list of 1 or 2 revisions. 
+    # First revision is traffic target "current"
+    # Second revision is traffic target "candidate"
+    revisions: ["demo-app-4dz4f", "demo-app-2"]
+    rolloutPercent: 50 # Percent [0-99] of traffic to route to "candidate" revision
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: dgcr.io/knative-demo-1/demo-app:latest

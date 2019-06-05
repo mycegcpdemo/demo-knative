@@ -1,0 +1,31 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: demo-app
+  namespace: default
+spec:
+  runLatest:
+    configuration:
+      build:
+        apiVersion: build.knative.dev/v1alpha1
+        kind: Build
+        spec:
+          source:
+            git:
+              url: "https://github.com/mycegcpdemo/demo-knative.git"
+              revision: "master"
+            subPath: "flask-example/"
+          steps:
+          - name: build-and-push
+            image: "gcr.io/kaniko-project/executor:v0.6.0"
+            args:
+            - "--dockerfile=/workspace/Dockerfile"
+            - "--destination=gcr.io/knative-demo-1/demo-app:latest"
+      revisionTemplate:
+        metadata:
+          annotations:
+            autoscaling.knative.dev/minScale: "0"        
+        spec:
+          container:
+            image: gcr.io/knative-demo-1/demo-app:latest
+            imagePullPolicy: Always

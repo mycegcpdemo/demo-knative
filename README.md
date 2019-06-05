@@ -7,6 +7,8 @@
     * https://medium.com/google-cloud/hands-on-knative-part-1-f2d5ce89944e
     * https://medium.com/google-cloud/hands-on-knative-part-2-a27729f4d756
     * https://medium.com/google-cloud/hands-on-knative-part-3-d8731ad2f23d
+    * https://medium.com/knative/knative-v0-3-autoscaling-a-love-story-d6954279a67a
+    * Great step by step tutorial: https://github.com/meteatamel/knative-tutorial/blob/master/docs/01-helloworldserving.md
 
 
 4. Github Knative site: https://github.com/knative
@@ -46,6 +48,13 @@
 16. https://github.com/knative/build/blob/master/test/git-ssh/2-build.yaml
 
 17. "Cloud Platform" API needs to be enabled inorder to access GCR without authenticating
+
+18. knative cmds in kubectl:
+       * kubectl get builds, will list all builds
+       * kubectl delete builds --all, will delete all builds
+       * kubectl get ksvc, will list all knative services
+       * kubectl delete ksvc --all, will delete all knative services
+
 
 
 
